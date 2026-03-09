@@ -411,7 +411,7 @@
             top: 16px;
             width: 2px;
             height: calc(100% + 3rem);
-            background: linear-gradient(180deg, var(--primary), transparent);
+            background: linear-gradient(180deg, var(--primary), rgba(99, 102, 241, 0.3));
         }
 
         .timeline-item:last-child::after {
@@ -1110,7 +1110,7 @@
                     </p>
                 </div>
             </div>
-            <div class="timeline-item scroll-animate"></div>
+            <div class="timeline-item scroll-animate">
                 <div class="timeline-content">
                     <span class="timeline-date">April 2025</span>
                     <h3>Codec Technologies</h3>
@@ -1346,7 +1346,7 @@
                 <div class="contact-card">
                     <i class="fas fa-graduation-cap"></i>
                     <h3>Education</h3>
-                    <p>RJTEE Group of Institutes<br>B.Tech (2023-2027)</p>
+                    <p>Raipur institute of technology<br>B.Tech (2023-2027)</p>
                 </div>
             </div>
             <div class="social-links">
@@ -1365,7 +1365,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Mimansa Patle. Designed with ❤️ and passion for web development.</p>
+        <p>&copy; 2026 Mimansa Patle. Designed with ❤️ and passion for Full-Stack development.</p>
     </footer>
 
     <!-- Back to Top Button -->
@@ -1378,8 +1378,8 @@
     <script>
         // Download Resume Function
         function downloadResume() {
-            // Update this path to match where your resume PDF is located
-            const resumePath = "Mimansa_resume.pdf";
+            // Local PDF file in the repository
+            const resumePath = "Mimansa_Patle_Resume.pdf";
             const link = document.createElement('a');
             link.href = resumePath;
             link.download = 'Mimansa_Patle_Resume.pdf';
