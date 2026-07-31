@@ -1,88 +1,90 @@
 "use client";
+import { GraduationCap, Briefcase } from "lucide-react";
 import { experience, education } from "@/app/data";
 import FadeIn from "./FadeIn";
 
 export default function Experience() {
   return (
-    <section id="experience" style={{ background: "#0a0a0f", padding: "100px 6%", borderTop: "1px solid rgba(168,85,247,0.1)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+    <section id="experience" className="section bg-base">
+      <span
+        className="watermark left-[4%] top-[6%] text-[clamp(60px,12vw,160px)]"
+        style={{ color: "#c1615a", opacity: 0.06 }}
+      >
+        Journey
+      </span>
+      <div className="container-xl">
         <FadeIn>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-            <div style={{ width: 32, height: 2, background: "linear-gradient(90deg, #a855f7, #ec4899)" }} />
-            <span style={{ fontSize: 12, color: "#a855f7", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase" }}>My Journey</span>
+          <div className="eyebrow">
+            <div className="eyebrow-dash" />
+            <span className="eyebrow-text">My Journey</span>
           </div>
-          <h2 style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 900, letterSpacing: "-2px", color: "#fff", marginBottom: 60 }}>
-            Experience &amp; <span style={{ WebkitTextStroke: "2px rgba(168,85,247,0.7)", color: "transparent" }}>Education</span>
+          <h2 className="heading-xl mb-14">
+            Experience &amp; <span className="outline-text">Education</span>
           </h2>
         </FadeIn>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60 }}>
-          {/* Experience */}
-          <FadeIn direction="left" delay={0.1}>
-            <div>
-              <h3 style={{ fontSize: 12, fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "#4b5563", marginBottom: 32 }}>Work Experience</h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-                {experience.map((exp, i) => (
-                  <div key={i} style={{ display: "flex", gap: 20, paddingBottom: 36 }}>
-                    {/* Timeline */}
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
-                      <div style={{ width: 12, height: 12, borderRadius: "50%", background: "linear-gradient(135deg, #a855f7, #ec4899)", flexShrink: 0, marginTop: 4 }} />
-                      {i < experience.length - 1 && <div style={{ width: 2, flex: 1, background: "linear-gradient(180deg, #a855f7, rgba(168,85,247,0.1))", marginTop: 6 }} />}
-                    </div>
-                    {/* Content */}
-                    <div style={{ background: "rgba(168,85,247,0.04)", border: "1px solid rgba(168,85,247,0.1)", borderRadius: 12, padding: "20px 20px", flex: 1 }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8, marginBottom: 4 }}>
-                        <h4 style={{ fontSize: 16, fontWeight: 800, color: "#fff" }}>{exp.company}</h4>
-                        <span style={{ fontSize: 11, color: "#6b7280", background: "rgba(255,255,255,0.05)", padding: "3px 10px", borderRadius: 4, border: "1px solid rgba(255,255,255,0.08)" }}>{exp.period}</span>
-                      </div>
-                      <p style={{ fontSize: 13, color: "#a855f7", fontWeight: 600, marginBottom: 4 }}>{exp.role}</p>
-                      <p style={{ fontSize: 11, color: "#6b7280", marginBottom: 12 }}>{exp.type}</p>
-                      <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 6 }}>
-                        {exp.points.slice(0, 2).map((pt, j) => (
-                          <li key={j} style={{ display: "flex", gap: 8, fontSize: 13, color: "#9ca3af", lineHeight: 1.6 }}>
-                            <span style={{ color: "#a855f7", flexShrink: 0, fontSize: 8, marginTop: 5 }}>◆</span>
-                            {pt}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
+        {/* Education — featured strip */}
+        <FadeIn>
+          <h3 className="mb-4 text-xs font-bold uppercase tracking-[3px] text-faint">Education</h3>
+          {education.map((edu, i) => (
+            <div
+              key={i}
+              className="mb-14 flex flex-col gap-5 rounded-2xl border border-gold/20 bg-gold/[0.06] p-7 sm:flex-row sm:items-center"
+            >
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gold text-[#1a1512]">
+                <GraduationCap size={26} />
+              </div>
+              <div className="flex-1">
+                <div className="mb-1 flex flex-wrap items-start justify-between gap-2">
+                  <h4 className="text-lg font-extrabold text-ink">{edu.institution}</h4>
+                  <span className="badge shrink-0">{edu.period}</span>
+                </div>
+                <p className="mb-3 text-[13px] font-semibold text-gold">{edu.degree}</p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-full border border-gold/30 bg-gold/15 px-2.5 py-1 text-xs font-bold text-ink">
+                    CGPA {edu.cgpa}
+                  </span>
+                  <span className="badge">{edu.note}</span>
+                </div>
               </div>
             </div>
-          </FadeIn>
+          ))}
+        </FadeIn>
 
-          {/* Education */}
-          <FadeIn direction="right" delay={0.2}>
-            <div>
-              <h3 style={{ fontSize: 12, fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "#4b5563", marginBottom: 32 }}>Education</h3>
-              {education.map((edu, i) => (
-                <div key={i} style={{ display: "flex", gap: 20, marginBottom: 36 }}>
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
-                    <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#ec4899", flexShrink: 0, marginTop: 4 }} />
-                  </div>
-                  <div style={{ background: "rgba(236,72,153,0.05)", border: "1px solid rgba(236,72,153,0.15)", borderRadius: 12, padding: "20px 20px", flex: 1 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8, marginBottom: 4 }}>
-                      <h4 style={{ fontSize: 16, fontWeight: 800, color: "#fff" }}>{edu.institution}</h4>
-                      <span style={{ fontSize: 11, color: "#6b7280", background: "rgba(255,255,255,0.05)", padding: "3px 10px", borderRadius: 4, border: "1px solid rgba(255,255,255,0.08)" }}>{edu.period}</span>
+        {/* Work Experience — grid */}
+        <FadeIn delay={0.1}>
+          <h3 className="mb-6 text-xs font-bold uppercase tracking-[3px] text-faint">Work Experience</h3>
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+            {experience.map((exp, i) => (
+              <FadeIn key={i} delay={0.05 * i}>
+                <div className="h-full rounded-xl border border-white/[0.08] bg-white/[0.03] p-6">
+                  <div className="mb-3 flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand text-ink">
+                        <Briefcase size={17} />
+                      </div>
+                      <div>
+                        <h4 className="text-base font-extrabold leading-tight text-ink">{exp.company}</h4>
+                        <p className="text-[11px] text-dim">{exp.type}</p>
+                      </div>
                     </div>
-                    <p style={{ fontSize: 13, color: "#ec4899", fontWeight: 600, marginBottom: 4 }}>B.Tech CSE</p>
-                    <p style={{ fontSize: 13, color: "#9ca3af", lineHeight: 1.6 }}>{edu.degree}</p>
+                    <span className="badge shrink-0">{exp.period}</span>
                   </div>
+                  <p className="mb-3 text-[13px] font-semibold text-brand">{exp.role}</p>
+                  <ul className="flex flex-col gap-1.5">
+                    {exp.points.slice(0, 3).map((pt, j) => (
+                      <li key={j} className="flex gap-2 text-[13px] leading-[1.6] text-muted">
+                        <span className="mt-[5px] shrink-0 text-[8px] text-brand">◆</span>
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              ))}
-
-
-            </div>
-          </FadeIn>
-        </div>
+              </FadeIn>
+            ))}
+          </div>
+        </FadeIn>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          section > div > div:last-child { grid-template-columns: 1fr !important; gap: 32px !important; }
-        }
-      `}</style>
     </section>
   );
 }

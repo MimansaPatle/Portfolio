@@ -22,7 +22,7 @@ export default function Loader() {
         position: "fixed",
         inset: 0,
         zIndex: 9999,
-        background: "#0a0a0f",
+        background: "#121212",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -33,33 +33,20 @@ export default function Loader() {
         pointerEvents: fading ? "none" : "all",
       }}
     >
-      {/* Glow */}
-      <div
-        style={{
-          position: "absolute",
-          width: 300,
-          height: 300,
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-
       {/* Logo */}
       <div
+        className="font-display"
         style={{
           fontSize: "clamp(56px, 10vw, 100px)",
-          fontWeight: 900,
-          letterSpacing: "-3px",
+          letterSpacing: "-2px",
           lineHeight: 1,
-          color: "#fff",
+          color: "#f5f0e6",
           position: "relative",
           zIndex: 1,
         }}
       >
-        M<span style={{ color: "#a855f7" }}>P</span>
-        <span style={{ color: "#ec4899", fontSize: "0.6em" }}>.</span>
+        M<span style={{ color: "#c1615a" }}>P</span>
+        <span style={{ color: "#d9a35c", fontSize: "0.6em" }}>.</span>
       </div>
 
       {/* Progress bar */}
@@ -67,7 +54,7 @@ export default function Loader() {
         style={{
           width: 140,
           height: 2,
-          background: "#1a1a2e",
+          background: "#2a241e",
           borderRadius: 2,
           overflow: "hidden",
           position: "relative",
@@ -77,7 +64,7 @@ export default function Loader() {
         <div
           style={{
             height: "100%",
-            background: "linear-gradient(90deg, #a855f7, #ec4899)",
+            background: "#c1615a",
             borderRadius: 2,
             animation: "loaderBar 1.6s ease forwards",
           }}

@@ -1,55 +1,80 @@
 "use client";
 import { certifications } from "@/app/data";
-import { Trophy, FileCheck, Award, BookOpen } from "lucide-react";
+import { Trophy, FileCheck, Award, BookOpen, BadgeCheck } from "lucide-react";
 import FadeIn from "./FadeIn";
 
-const iconTypes = ["trophy", "filecheck", "award", "book"] as const;
-type IconType = typeof iconTypes[number];
-
-function CertIcon({ type }: { type: IconType }) {
-  if (type === "trophy") return <Trophy size={28} />;
-  if (type === "filecheck") return <FileCheck size={28} />;
-  if (type === "book") return <BookOpen size={28} />;
-  return <Award size={28} />;
-}
+const ICONS = [Trophy, FileCheck, Award, BookOpen];
 
 export default function Certifications() {
   return (
-    <section id="certifications" style={{ background: "#0d0d18", padding: "100px 6%", borderTop: "1px solid rgba(168,85,247,0.1)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+    <section id="certifications" className="section bg-alt">
+      <span
+        className="watermark right-[4%] top-[6%] text-[clamp(60px,12vw,160px)]"
+        style={{ color: "#c1615a", opacity: 0.06 }}
+      >
+        Awards
+      </span>
+      <div className="container-xl">
         <FadeIn>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-            <div style={{ width: 32, height: 2, background: "linear-gradient(90deg, #a855f7, #ec4899)" }} />
-            <span style={{ fontSize: 12, color: "#a855f7", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase" }}>Achievements</span>
+          <div className="eyebrow">
+            <div className="eyebrow-dash" />
+            <span className="eyebrow-text">Achievements</span>
           </div>
-          <h2 style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 900, letterSpacing: "-2px", color: "#fff", marginBottom: 60 }}>
-            Certifications &amp; <span style={{ WebkitTextStroke: "2px rgba(168,85,247,0.7)", color: "transparent" }}>Training</span>
+          <h2 className="heading-xl mb-14">
+            Certifications &amp; <span className="outline-text">Training</span>
           </h2>
         </FadeIn>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
-          {certifications.map((cert, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
-              <div
-                style={{ background: "rgba(168,85,247,0.04)", border: "1px solid rgba(168,85,247,0.12)", borderRadius: 14, padding: "24px 20px", transition: "all 0.3s", height: "100%" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#a855f7"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 16px 40px rgba(168,85,247,0.15)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(168,85,247,0.12)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "none"; }}
-              >
-                <div style={{ color: "#a855f7", marginBottom: 16 }}><CertIcon type={iconTypes[i] ?? "award"} /></div>
-                <h3 style={{ fontSize: 15, fontWeight: 700, color: "#e8e0f0", marginBottom: 8, lineHeight: 1.4 }}>{cert.title}</h3>
-                <p style={{ fontSize: 13, color: "#6b7280", marginBottom: 12 }}>{cert.issuer}</p>
-                <span style={{
-                  display: "inline-block", fontSize: 12, fontWeight: 600,
-                  color: cert.score.includes("Progress") ? "#f59e0b" : "#a855f7",
-                  background: cert.score.includes("Progress") ? "rgba(245,158,11,0.1)" : "rgba(168,85,247,0.1)",
-                  padding: "4px 12px", borderRadius: 50,
-                  border: `1px solid ${cert.score.includes("Progress") ? "rgba(245,158,11,0.3)" : "rgba(168,85,247,0.3)"}`,
-                }}>
-                  {cert.score}
-                </span>
-              </div>
-            </FadeIn>
-          ))}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {certifications.map((cert, i) => {
+            const Icon = ICONS[i] ?? Award;
+            const inProgress = cert.score.includes("Progress");
+            const isBrand = i % 2 === 0;
+            const tile = isBrand ? "bg-brand text-ink" : "bg-gold text-[#1a1512]";
+            const accentBorder = isBrand ? "border-brand/30" : "border-gold/30";
+            const accentBg = isBrand ? "bg-brand/[0.08]" : "bg-gold/[0.08]";
+            const accentText = isBrand ? "text-brand" : "text-gold";
+
+            return (
+              <FadeIn key={i} delay={i * 0.08}>
+                <div className="group h-[230px] [perspective:1200px]">
+                  <div className="relative h-full w-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    {/* Front */}
+                    <div className="absolute inset-0 flex h-full flex-col rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 [backface-visibility:hidden]">
+                      <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-full ${tile}`}>
+                        <Icon size={20} />
+                      </div>
+                      <h3 className="mb-2 text-[15px] font-bold leading-[1.4] text-ink">{cert.title}</h3>
+                      <p className="mb-3 text-[13px] text-dim">{cert.issuer}</p>
+                      <span
+                        className={`mt-auto inline-block w-fit rounded-full border px-3 py-1 text-xs font-semibold ${
+                          inProgress
+                            ? "border-amber-500/30 bg-amber-500/10 text-amber-500"
+                            : "border-brand/30 bg-brand/10 text-brand"
+                        }`}
+                      >
+                        {cert.score}
+                      </span>
+                    </div>
+
+                    {/* Back */}
+                    <div
+                      className={`absolute inset-0 flex h-full flex-col items-center justify-center rounded-2xl border p-6 text-center [backface-visibility:hidden] [transform:rotateY(180deg)] ${accentBorder} ${accentBg}`}
+                    >
+                      <div className={`mb-3 flex h-14 w-14 items-center justify-center rounded-full border-2 ${accentBorder} ${accentText}`}>
+                        <BadgeCheck size={26} />
+                      </div>
+                      <p className="text-[11px] font-bold uppercase tracking-[2px] text-dim">
+                        {inProgress ? "In Progress" : "Verified"}
+                      </p>
+                      <p className="mt-2 text-sm font-bold text-ink">{cert.issuer}</p>
+                      <p className={`mt-1 text-xs font-semibold ${accentText}`}>{cert.score}</p>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -39,10 +39,10 @@ export default function Typewriter() {
 
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
-      <span style={{ color: "#c084fc" }}>{text}</span>
+      <span style={{ color: "#c1615a" }}>{text}</span>
       <span
         style={{
-          color: "#a855f7",
+          color: "#d9a35c",
           fontWeight: 300,
           animation: "tw-blink 1s step-end infinite",
           display: "inline-block",

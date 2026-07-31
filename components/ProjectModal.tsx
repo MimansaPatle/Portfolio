@@ -1,5 +1,5 @@
 "use client";
-import { X, ArrowUpRight, Github } from "lucide-react";
+import { X, ArrowUpRight, Github, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface Project {
@@ -12,6 +12,7 @@ interface Project {
   category: string;
   color: string;
   github?: string;
+  inProgress?: boolean;
 }
 
 interface Props {
@@ -30,11 +31,15 @@ export default function ProjectModal({ project, onClose }: Props) {
       setMounted(false);
       document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [project]);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
@@ -43,78 +48,100 @@ export default function ProjectModal({ project, onClose }: Props) {
 
   return (
     <>
-      <div onClick={onClose} style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.8)", backdropFilter: "blur(8px)", opacity: mounted ? 1 : 0, transition: "opacity 0.25s ease" }} />
-      <div style={{ position: "fixed", inset: 0, zIndex: 101, display: "flex", alignItems: "center", justifyContent: "center", padding: 20, pointerEvents: "none" }}>
-        <div style={{
-          background: "#0d0d18", borderRadius: 16,
-          border: `1px solid ${project.color}30`,
-          width: "min(680px, 92vw)", maxHeight: "85vh", overflowY: "auto",
-          boxShadow: `0 32px 80px ${project.color}20`,
-          pointerEvents: "all",
-          opacity: mounted ? 1 : 0,
-          transform: mounted ? "translateY(0) scale(1)" : "translateY(40px) scale(0.97)",
-          transition: "opacity 0.35s ease, transform 0.35s ease",
-        }}>
-          <div style={{ height: 4, background: `linear-gradient(90deg, ${project.color}, ${project.color}60)`, borderRadius: "16px 16px 0 0" }} />
-          <div style={{ padding: "32px 36px 36px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
+      <div
+        onClick={onClose}
+        className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md transition-opacity duration-300"
+        style={{ opacity: mounted ? 1 : 0 }}
+      />
+      <div className="pointer-events-none fixed inset-0 z-[101] flex items-center justify-center p-5">
+        <div
+          className="pointer-events-auto max-h-[85vh] w-[min(680px,92vw)] overflow-y-auto rounded-2xl border border-white/10 bg-alt transition-all duration-300"
+          style={{
+            opacity: mounted ? 1 : 0,
+            transform: mounted ? "translateY(0) scale(1)" : "translateY(40px) scale(0.97)",
+          }}
+        >
+          <div className="h-1 rounded-t-2xl" style={{ background: project.color }} />
+          <div className="p-9 pt-8">
+            <div className="mb-5 flex items-start justify-between gap-4">
               <div>
-                <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: project.color, background: `${project.color}15`, padding: "3px 10px", borderRadius: 4, display: "inline-block", marginBottom: 10 }}>
-                  {project.category}
-                </span>
-                <h2 style={{ fontSize: 26, fontWeight: 900, color: "#fff", letterSpacing: "-1px", lineHeight: 1, marginBottom: 4 }}>{project.title}</h2>
-                <p style={{ fontSize: 14, color: project.color, fontWeight: 600 }}>{project.subtitle}</p>
+                <div className="mb-2.5 flex flex-wrap items-center gap-2">
+                  <span
+                    className="inline-block rounded-full px-2.5 py-[3px] text-[10px] font-bold uppercase tracking-wider"
+                    style={{ color: project.color, background: `${project.color}18` }}
+                  >
+                    {project.category}
+                  </span>
+                  {project.inProgress && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-amber-400/10 px-2.5 py-[3px] text-[10px] font-bold uppercase tracking-wider text-amber-400">
+                      <Clock size={10} /> In Progress
+                    </span>
+                  )}
+                </div>
+                <h2 className="font-display mb-1 text-[26px] leading-none text-ink">{project.title}</h2>
+                <p className="text-sm font-semibold" style={{ color: project.color }}>
+                  {project.subtitle}
+                </p>
               </div>
-              <button onClick={onClose}
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "50%", width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0, color: "#9ca3af", transition: "all 0.2s" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "#fff"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "#9ca3af"; }}
+              <button
+                onClick={onClose}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-muted transition-colors hover:bg-white/10 hover:text-ink"
               >
                 <X size={16} />
               </button>
             </div>
 
-            <p style={{ fontSize: 14, color: "#9ca3af", lineHeight: 1.8, marginBottom: 24 }}>{project.description}</p>
+            <p className="mb-6 text-sm leading-[1.8] text-muted">{project.description}</p>
 
-            <div style={{ marginBottom: 24 }}>
-              <h3 style={{ fontSize: 11, fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#4b5563", marginBottom: 14 }}>Key Features</h3>
-              <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 10 }}>
-                {project.points.map((pt, i) => (
-                  <li key={i} style={{ display: "flex", gap: 10, fontSize: 13, color: "#9ca3af", lineHeight: 1.7 }}>
-                    <span style={{ width: 18, height: 18, borderRadius: "50%", background: `${project.color}15`, border: `1px solid ${project.color}40`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
-                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: project.color, display: "block" }} />
-                    </span>
-                    {pt}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {project.points.length > 0 && (
+              <div className="mb-6">
+                <h3 className="mb-3.5 text-[11px] font-bold uppercase tracking-[2px] text-faint">Key Features</h3>
+                <ul className="flex flex-col gap-2.5">
+                  {project.points.map((pt, i) => (
+                    <li key={i} className="flex gap-2.5 text-[13px] leading-[1.7] text-muted">
+                      <span
+                        className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border"
+                        style={{ background: `${project.color}18`, borderColor: `${project.color}40` }}
+                      >
+                        <span className="block h-1.5 w-1.5 rounded-full" style={{ background: project.color }} />
+                      </span>
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-            <div style={{ marginBottom: 28 }}>
-              <h3 style={{ fontSize: 11, fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#4b5563", marginBottom: 12 }}>Tech Stack</h3>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            <div className="mb-7">
+              <h3 className="mb-3 text-[11px] font-bold uppercase tracking-[2px] text-faint">Tech Stack</h3>
+              <div className="flex flex-wrap gap-2">
                 {project.tech.map((t) => (
-                  <span key={t} style={{ fontSize: 12, color: "#c4b5d4", background: "rgba(168,85,247,0.1)", padding: "5px 12px", borderRadius: 6, border: "1px solid rgba(168,85,247,0.2)", fontWeight: 500 }}>
+                  <span key={t} className="badge">
                     {t}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: 12 }}>
-              {project.github && (
-                <a href={project.github} target="_blank" rel="noopener noreferrer"
-                  style={{ background: `linear-gradient(135deg, ${project.color}, ${project.color}cc)`, color: "#fff", padding: "11px 24px", borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, textDecoration: "none", transition: "opacity 0.2s" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            <div className="flex flex-wrap gap-3">
+              {project.github ? (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 rounded-full px-6 py-2.5 text-[13px] font-bold text-ink transition-opacity hover:opacity-85"
+                  style={{ background: project.color }}
                 >
                   <Github size={14} /> View Code
                 </a>
+              ) : (
+                <span className="flex items-center gap-1.5 rounded-full border border-white/10 px-6 py-2.5 text-[13px] font-semibold text-dim">
+                  <Clock size={14} /> Demo coming soon
+                </span>
               )}
-              <button onClick={onClose}
-                style={{ background: "transparent", color: "#9ca3af", border: "1px solid rgba(255,255,255,0.1)", padding: "11px 24px", borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, transition: "all 0.2s" }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)"; e.currentTarget.style.color = "#fff"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "#9ca3af"; }}
+              <button
+                onClick={onClose}
+                className="flex items-center gap-1.5 rounded-full border border-white/10 px-6 py-2.5 text-[13px] font-semibold text-muted transition-colors hover:border-white/30 hover:text-ink"
               >
                 Close <ArrowUpRight size={14} />
               </button>

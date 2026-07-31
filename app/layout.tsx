@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Anton } from "next/font/google";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space", display: "swap" });
+const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Mimansa Patle | Full-Stack Developer",
@@ -20,7 +21,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={spaceGrotesk.variable} style={{ fontFamily: "var(--font-space), sans-serif" }}>
+      <body
+        className={`${spaceGrotesk.variable} ${anton.variable}`}
+        style={{ fontFamily: "var(--font-space), sans-serif" }}
+      >
         {children}
       </body>
     </html>
