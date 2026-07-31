@@ -116,12 +116,9 @@ export default function Hero() {
       </div>
 
       {/* Stats band */}
-      <div className="absolute inset-x-0 bottom-0 z-10 flex justify-center overflow-x-auto bg-cream">
-        {STATS.map((s, i) => (
-          <div
-            key={s.label}
-            className={`shrink-0 px-6 py-4 text-center sm:px-10 ${i < STATS.length - 1 ? "border-r border-black/10" : ""}`}
-          >
+      <div className="absolute inset-x-0 bottom-0 z-10 grid grid-cols-2 divide-x divide-y divide-black/10 bg-cream sm:grid-cols-4 sm:divide-y-0">
+        {STATS.map((s) => (
+          <div key={s.label} className="px-4 py-4 text-center sm:px-10">
             <div className="font-display text-2xl text-[#1a1512]">
               <CountUp value={s.num} />
             </div>

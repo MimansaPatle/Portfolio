@@ -37,6 +37,11 @@
   white-space: nowrap;
   line-height: 1;
   z-index: 0;
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
 }
 
 @utility scallop-x {
