@@ -3,6 +3,7 @@ import { skills } from "@/app/data";
 import FadeIn from "./FadeIn";
 
 const ICONS: Record<string, string> = {
+  "Core CS Fundamentals": "Σ",
   Databases: "◉",
   "Programming Languages": "{ }",
   Frontend: "◈",

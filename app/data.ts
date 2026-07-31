@@ -12,7 +12,8 @@ export const personalInfo = {
 };
 
 export const skills = {
-  Databases: ["MongoDB", "MySQL (SQL)", "DBMS Fundamentals"],
+  "Core CS Fundamentals": ["Data Structures & Algorithms", "Operating Systems", "Computer Networks", "DBMS"],
+  Databases: ["MongoDB", "MySQL (SQL)"],
   "Programming Languages": ["C", "Java", "Python", "JavaScript", "TypeScript"],
   Frontend: ["HTML5", "CSS3", "React.js", "Next.js", "Tailwind CSS"],
   Backend: ["Node.js", "Express.js", "REST APIs"],
