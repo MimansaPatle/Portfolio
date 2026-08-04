@@ -113,7 +113,7 @@ export const projects = [
     id: 1,
     title: "URL Shortener",
     subtitle: "Full-Stack Web Application",
-    tech: ["Next.js", "Node.js", "MongoDB"],
+    tech: ["Next.js", "React", "Tailwind CSS", "MongoDB"],
     description:
       "A full-stack URL shortener that converts long URLs into short, shareable links, built independently end-to-end — from database schema to link-generation logic to UI.",
     points: [
@@ -130,14 +130,14 @@ export const projects = [
     id: 2,
     title: "CivicWatch India",
     subtitle: "Civic Issue Reporting Platform",
-    tech: ["Next.js", "Node.js", "Express.js", "MongoDB"],
+    tech: ["React 19", "Vite", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Leaflet", "Cloudinary"],
     description:
-      "A civic engagement platform for reporting local issues — potholes, garbage, water leakage — with image and location details, plus an admin dashboard for tracking resolution.",
+      "A civic engagement platform for reporting local issues — potholes, garbage, water leakage — with photo uploads, geotagged locations on an interactive map, and an admin dashboard for tracking resolution.",
     points: [
-      "Built a platform for citizens to report civic issues with images and precise location details.",
-      "Designed the reporting APIs and MongoDB data models behind issue submissions.",
+      "Built interactive map-based issue reporting with Leaflet, including clustering and heatmap views.",
+      "Implemented JWT authentication and Cloudinary-backed photo uploads for issue submissions.",
+      "Designed the Express REST API and MongoDB/Mongoose data models behind issue reports.",
       "Built an admin dashboard for tracking, managing, and resolving reported issues.",
-      "Delivered as the capstone project for a Node.js/backend vocational training.",
     ],
     category: "Full-Stack",
     color: "#d9a35c",
@@ -147,7 +147,7 @@ export const projects = [
     id: 3,
     title: "PrepAI",
     subtitle: "AI Interview Preparation Platform",
-    tech: ["React / Next.js", "Node.js", "MongoDB", "AI APIs"],
+    tech: ["Next.js 16", "React 19", "Tailwind CSS", "MongoDB", "Auth.js", "Gemini API", "React PDF"],
     description:
       "An AI-powered interview preparation platform, currently in development. Full feature breakdown and live demo coming soon.",
     points: [],
@@ -159,7 +159,7 @@ export const projects = [
     id: 4,
     title: "Personal Developer Portfolio",
     subtitle: "This Very Site",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Lucide React"],
     description:
       "A personal developer portfolio built from scratch to showcase projects, skills, and experience with a clean, responsive, animated design.",
     points: [
