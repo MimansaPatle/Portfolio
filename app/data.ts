@@ -153,7 +153,7 @@ export const projects = [
     points: [],
     category: "Full-Stack",
     color: "#c1615a",
-    inProgress: true,
+    github: "https://github.com/MimansaPatle/PrepAI",
   },
   {
     id: 4,
@@ -170,6 +170,6 @@ export const projects = [
     ],
     category: "Web",
     color: "#d9a35c",
-    github: "https://github.com/MimansaPatle",
+    github: "https://github.com/MimansaPatle/Portfolio",
   },
 ];
