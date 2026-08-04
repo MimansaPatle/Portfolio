@@ -49,11 +49,7 @@ function ProjectCard({ project, onSelect }: { project: Project; onSelect: (p: Pr
               >
                 {project.category}
               </span>
-              {project.inProgress && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-amber-400/10 px-2.5 py-[3px] text-[10px] font-bold uppercase tracking-wider text-amber-400">
-                  <Clock size={10} /> In Progress
-                </span>
-              )}
+            
             </div>
             <h3 className="font-display text-xl leading-tight text-ink">{project.title}</h3>
             <p className="mt-0.5 text-[13px] font-medium" style={{ color: project.color }}>
