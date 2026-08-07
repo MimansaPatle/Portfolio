@@ -3,7 +3,7 @@ export const personalInfo = {
   title: "Full-Stack Developer",
   subtitle: "B.Tech CSE Student @ Raipur Institute of Technology",
   email: "mimansapatle@gmail.com",
-  location: "Nagpur, Maharashtra, India",
+  location: "Raipur, Chhattisgarh, India",
   github: "https://github.com/MimansaPatle",
   linkedin: "https://www.linkedin.com/in/mimansa-patle-b489a6309",
   resumeUrl: "/Mimansa_Patle_Resume.pdf",
